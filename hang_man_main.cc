@@ -15,7 +15,7 @@ int main() {
   Hangman game;
   ifstream inStream;
   string dictionary[109582], solution, word_selected, reply, wrong_guesses = "", all_guesses = "";
-  bool replay = true;
+  bool replay = true, valid = false;
   int random, solution_length = 0, win = 0, lose = 0, total;
   char guess = '\0';
 
@@ -50,12 +50,23 @@ int main() {
     //This section determines if the game will be played again
     cout << "Scoreboard:" << endl;
     cout << "# of Wins: " << win << "   # of Losses: " << lose << endl;
-    cout << "Would you like to play again? (Yes or No)" << endl;
-    cin >> reply;
-    if (reply == "Yes" || reply == "yes" || reply == "y" || reply == "Y")
-      replay = true;
-    if (reply == "No" || reply == "no" || reply == "n" || reply == "N")
-      replay = false;
+    while (valid == false) {
+      cout << "Would you like to play again? (Yes or No)" << endl;
+      cin >> reply;
+      if (reply == "Yes" || reply == "yes" || reply == "y" || reply == "Y") {
+        replay = true;
+        valid = true;
+      }
+      else if (reply == "No" || reply == "no" || reply == "n" || reply == "N"){
+        replay = false;
+        valid = true;
+      }
+      else {
+        cout << "Sorry, that was an invalid response. Try again." << endl;
+        valid = false;
+      }
+    }
+    valid = false;
   }
 
   return 0;
